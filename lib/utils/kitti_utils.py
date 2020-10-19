@@ -3,6 +3,7 @@ from scipy.spatial import Delaunay
 import scipy
 import lib.utils.object3d as object3d
 import torch
+import cv2
 
 
 def get_objects_from_label(label_file):
@@ -234,8 +235,7 @@ def get_iou3d(corners3d, query_corners3d, need_bev=False):
 
     return iou3d
 
-
-### Extras from original file
+### ADDED BY ME (KITTI UTILS IN VIS FOLDER(DOCUMENTS)
 
 def project_to_image(pts_3d, P):
     ''' Project 3d points to image plane.
@@ -331,3 +331,4 @@ def compute_box_3d_modified(obj, P):
     corners_2d = project_to_image(np.transpose(corners_3d), P);
     #print 'corners_2d: ', corners_2d
     return corners_2d, np.transpose(corners_3d)
+

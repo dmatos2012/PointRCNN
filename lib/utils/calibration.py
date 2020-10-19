@@ -31,6 +31,7 @@ class Calibration(object):
         self.P2 = calib['P2']  # 3 x 4
         self.R0 = calib['R0']  # 3 x 3
         self.V2C = calib['Tr_velo2cam']  # 3 x 4
+        self.C2V = inverse_rigid_trans(self.V2C)
 
         # Camera intrinsics and extrinsics
         self.cu = self.P2[0, 2]
@@ -139,7 +140,7 @@ class Calibration(object):
         pts_rect = np.concatenate((x.reshape(-1, 1), y.reshape(-1, 1), z.reshape(-1, 1)), axis=1)
         return pts_rect
 
-#### Extras from original file 
+#### ADDED BY ME FROM DIFFERENT CALIB FILES(VIS IN DOCUMENTS.. KITTI_UTILS.PY)
 
     def cart2hom(self, pts_3d):
         ''' Input: nx3 points in Cartesian
@@ -174,3 +175,5 @@ def inverse_rigid_trans(Tr):
     inv_Tr[0:3,0:3] = np.transpose(Tr[0:3,0:3])
     inv_Tr[0:3,3] = np.dot(-np.transpose(Tr[0:3,0:3]), Tr[0:3,3])
     return inv_Tr
+
+    
